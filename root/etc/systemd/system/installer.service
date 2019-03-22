@@ -1,0 +1,11 @@
+[Unit]
+Description=Automagically install all the stuff needed to work. 
+
+[Service]
+ExecStart=/root/installer.sh
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
+

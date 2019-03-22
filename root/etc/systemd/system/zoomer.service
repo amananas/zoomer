@@ -1,0 +1,12 @@
+[Unit]
+Description=Auto restart service for the X server.
+
+[Service]
+ExecStart=/usr/bin/env python3 /root/zoomer.py
+Restart=always
+User=root
+Group=root
+
+[Install]
+WantedBy=multi-user.target
+
