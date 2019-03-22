@@ -28,6 +28,9 @@ def initMpv():
     getMpvID()
     time.sleep(3)
     subprocess.run(['xdotool', 'key', '--clearmodifiers', '--window', str(mpvID), 'Up'])
+    subprocess.run(['xdotool', 'key', '--clearmodifiers', '--window', str(mpvID), 'Up'])
+    subprocess.run(['xdotool', 'key', '--clearmodifiers', '--window', str(mpvID), 'Up'])
+    subprocess.run(['xdotool', 'key', '--clearmodifiers', '--window', str(mpvID), 'Up'])
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(clk, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
