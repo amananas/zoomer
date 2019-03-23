@@ -26,10 +26,11 @@ def getMpvID():
 
 def initMpv():
     getMpvID()
-    time.sleep(3)
+    time.sleep(10)
     subprocess.run(['xdotool', 'key', '--clearmodifiers', '--window', str(mpvID), 'Up'])
+    time.sleep(1)
     subprocess.run(['xdotool', 'key', '--clearmodifiers', '--window', str(mpvID), 'Up'])
-    subprocess.run(['xdotool', 'key', '--clearmodifiers', '--window', str(mpvID), 'Up'])
+    time.sleep(1)
     subprocess.run(['xdotool', 'key', '--clearmodifiers', '--window', str(mpvID), 'Up'])
 
 GPIO.setmode(GPIO.BCM)
@@ -55,26 +56,26 @@ try:
         if clkState != clkLastState:
             if dtState != clkState:
                 counter += 1
-                if counter % 4 == 0:
+                if counter % 2 == 0:
                     subprocess.run(['xdotool', 'key', '--clearmodifiers', '--window', str(mpvID), 'Alt+minus'])
             else:
                 counter -= 1
-                if counter % 4 == 0:
+                if counter % 2 == 0:
                     subprocess.run(['xdotool', 'key', '--clearmodifiers', '--window', str(mpvID), 'Alt+plus'])
-                    
+
             if counter == 4000 or counter == -4000:
                 counter = 0
             clkLastState = clkState
-        
-        
+
+
         if GPIO.input(sw):
             pressed = False
         elif not pressed:
             pressed=True
             subprocess.run(['xdotool', 'key', '--clearmodifiers', '--window', str(mpvID), 'Alt+BackSpace'])
             counter=0
-            
-            
+
+
         probe = GPIO.input(colorSwitch) == 0
         if probe != lastProbe:
             with open(tmpFileName, 'w') as tmpFile:
@@ -84,7 +85,7 @@ try:
             subprocess.run(['killall', 'xinit'])
             lastProbe = probe
             initMpv()
-        
+
         time.sleep(0.001)
 finally:
         GPIO.cleanup()
